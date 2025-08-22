@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function KBList() {
   const [articles, setArticles] = useState([]);
@@ -11,7 +12,7 @@ function KBList() {
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const { data } = await api.get('/kb', { params: { query } });
+        const { data } = await api.get(`${API_URL}/api/kb`, { params: { query } });
         setArticles(data);
       } catch (err) {
         toast.error('Failed to load articles');

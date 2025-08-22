@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Settings() {
   const [config, setConfig] = useState({ autoCloseEnabled: true, confidenceThreshold: 0.78, slaHours: 24 });
@@ -23,7 +24,7 @@ function Settings() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put('/config', config);
+      await api.put(`${API_URL}/api/config`, config);
       toast.success('Settings updated');
     } catch (err) {
       toast.error('Failed to update settings');

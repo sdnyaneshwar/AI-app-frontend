@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
 import { useAuthStore } from '../store/authStore';
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 function KBEditor() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ function KBEditor() {
     if (id && id !== 'new') {
       async function fetchArticle() {
         try {
-          const { data } = await api.get(`/kb/${id}`);
+          const { data } = await api.get(`${API_URL}/api/kb/${id}`);
           setForm({ ...data, tags: data.tags.join(', ') });
         } catch (err) {
           toast.error('Failed to load article');
@@ -40,13 +40,13 @@ function KBEditor() {
 
       if (id && id !== 'new') {
         // Update
-        await api.put(`/kb/${id}`, data, {
+        await api.put(`${API_URL}/api/kb/${id}`, data, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Article updated');
       } else {
         // Create
-        await api.post('/kb', data, {
+        await api.post(`${API_URL}/api/kb`, data, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Article created');

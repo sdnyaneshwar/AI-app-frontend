@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
 import { useAuthStore } from '../store/authStore';
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 
@@ -25,8 +26,8 @@ function TicketDetail() {
         console.log("Fetching ticket:", id, "with headers:", headers);
 
         const [ticketRes, auditRes] = await Promise.all([
-          api.get(`/tickets/${id}`, { headers }),
-          api.get(`/tickets/${id}/audit`, { headers }),
+          api.get(`${API_URL}/api/tickets/${id}`, { headers }),
+          api.get(`${API_URL}/api/tickets/${id}/audit`, { headers }),
         ]);
         console.log("Ticket fetched:", ticketRes, "Audit logs fetched:", auditRes);
         
@@ -53,7 +54,7 @@ const handleReply = async (e) => {
     const headers = { Authorization: `Bearer ${token}` };
 
     await api.post(
-      `/tickets/${id}/reply`,
+      `${API_URL}/api/tickets/${id}/reply`,
       { reply, status: "resolved" },
       { headers }
     );

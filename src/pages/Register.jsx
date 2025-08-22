@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuthStore } from '../store/authStore';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Register() {
   const [name, setName] = useState('');

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import api from '../lib/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -16,7 +17,7 @@ export const useAuthStore = create((set) => ({
   },
 
   login: async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
+    const { data } = await api.post(`${API_URL}/api/auth/login`, { email, password });
     const user = { id: data.user._id, role: data.user.role }; // adjust to backend response
     console.log('user logged in:', data);
 
@@ -28,7 +29,7 @@ export const useAuthStore = create((set) => ({
   },
 
   register: async (name, email, password, role) => {
-    const { data } = await api.post('/auth/register', { name, email, password, role });
+    const { data } = await api.post(`${API_URL}/api/auth/register`, { name, email, password, role });
     const user = { id: data.id, role: data.role };
 
     // 🔑 persist token

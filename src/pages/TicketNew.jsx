@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function TicketNew() {
   const [form, setForm] = useState({ title: '', description: '', category: 'other' });
@@ -10,7 +11,7 @@ function TicketNew() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/tickets', form);
+      await api.post( `${API_URL}/api/tickets`, form);
       toast.success('Ticket created successfully');
       navigate('/');
     } catch (err) {

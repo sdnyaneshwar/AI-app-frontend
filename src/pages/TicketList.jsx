@@ -102,6 +102,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../lib/api';
 import { useAuthStore } from '../store/authStore';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function TicketList() {
   const [tickets, setTickets] = useState([]);
@@ -116,7 +117,7 @@ function TicketList() {
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const endpoint = tab === 'unassigned' && user.role === 'agent' ? '/tickets/unassigned' : '/tickets';
+        const endpoint = tab === 'unassigned' && user.role === 'agent' ? `${API_URL}/api/tickets/unassigned` : `${API_URL}/api/tickets`;
         const params = { page, limit };
         if (status) params.status = status;  // only add if not empty
         if (user.role === 'user') params.myTickets = true;
@@ -141,7 +142,7 @@ function TicketList() {
 
   const handleAssign = async (ticketId) => {
     try {
-      await api.post(`/tickets/${ticketId}/assign`, {});
+      await api.post(`${API_URL}/api/tickets/${ticketId}/assign`, {});
       toast.success('Ticket assigned to you');
       setTickets(tickets.filter((t) => t._id !== ticketId)); // Remove from unassigned list
     } catch (err) {
