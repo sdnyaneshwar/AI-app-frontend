@@ -150,9 +150,16 @@ function TicketList() {
     }
   };
 
-  if (!user) {
-    return <div className="text-center">Please log in to view tickets</div>;
-  }
+if (!user) {
+  return (
+    <div className="flex justify-center items-center h-[80vh]">
+      <div className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-8 py-6 rounded-2xl shadow-xl text-center animate-pulse">
+        <h2 className="text-2xl font-bold mb-2">Hello!</h2>
+        <p className="text-lg">Please log in to view tickets</p>
+      </div>
+    </div>
+  );
+}
 
   if (loading) return <div className="text-center">Loading...</div>;
 
