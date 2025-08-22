@@ -172,7 +172,7 @@ if (!user) {
         </Link>
       )}
       {user.role === 'agent' && (
-        <div className="flex space-x-4 mb-4">
+        <div className="flex space-x-4 mb-4 ">
           <button
             onClick={() => setTab('assigned')}
             className={`p-2 rounded ${tab === 'assigned' ? 'bg-blue-600 text-white' : 'bg-gray-300'}`}
@@ -190,7 +190,7 @@ if (!user) {
       <select
         value={status}
         onChange={(e) => setStatus(e.target.value)}
-        className="p-2 border rounded mb-4"
+        className="p-2 border rounded mb-4 ml-2.5 px-1"
         aria-label="Filter by status"
       >
         <option value="">All Statuses</option>
