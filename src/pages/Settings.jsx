@@ -10,7 +10,7 @@ function Settings() {
   useEffect(() => {
     async function fetchConfig() {
       try {
-        const { data } = await api.get('/config');
+        const { data } = await api.get(`${API_URL}/api/config`);
         setConfig(data);
       } catch (err) {
         toast.error('Failed to load settings');
